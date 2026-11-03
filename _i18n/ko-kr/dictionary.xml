@@ -329,4 +329,8 @@
   <block id="98ad55a24bfe8ea96b89a3f91b5a9b91" category="sidebar">초기 출시의 새로운 기능</block>
   <block id="00a527d997db989d93bacb8dc93db32f" category="sidebar">Novus Data Director에 대해 알아보세요</block>
   <block id="92675806a6b015bb6d65be3565b9618a" category="sidebar">NDD 인스턴스 상태 확인</block>
+  <block id="15cb202fc142bee9b3cfa0ed67d8b604" category="inline-link">ONTAP 9.19.1P91 관련 공지</block>
+  <block id="b57cb3e3bc243a97c9beec6fac31c373" category="list-text"><block ref="b57cb3e3bc243a97c9beec6fac31c373" category="inline-link-rx"></block></block>
+  <block id="f2bbda715979d8937e0cd660dfe7f5c4" category="inline-link">NetApp Data Director 26.10 관련 공지</block>
+  <block id="52653c98c3ea5274b3e0ba2d8e62508b" category="list-text"><block ref="52653c98c3ea5274b3e0ba2d8e62508b" category="inline-link-rx"></block></block>
 </blocks>
