@@ -1,0 +1,67 @@
+---
+sidebar: sidebar 
+permalink: get-started/requirements.html 
+keywords: novus requirements, novus hardware, novus software, novus data director, ontap data server, ndd 
+summary: 일반적으로 세 가지 범주로 나뉘는 Novus의 요구 사항을 숙지해야 합니다. 
+---
+= Novus 요구 사항
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+일반적으로 세 가지 범주로 나뉘는 Novus의 요구 사항을 숙지해야 합니다.
+
+
+TIP: 자세한 내용은 NetApp Hardware Universe 및 상호 운용성 매트릭스 툴에서 제품 요구 사항 및 제한 사항을 검토하십시오.
+
+
+
+[[ontap-data-server]]
+== ONTAP 데이터 서버
+
+Novus와 함께 사용되는 ONTAP 데이터 서버에는 몇 가지 요구 사항과 제약 조건이 있습니다. 초기 제품 출시의 경우, Novus 전용 하드웨어 향상 기능과 제한된 소프트웨어 및 구성 프로필을 갖춘 ONTAP 기반 AFF 플랫폼입니다. 지원되는 설계는 출시 시점에 의도적으로 제한되었으며, 주요 요구 사항과 제약 조건이 명확하게 명시되어 있습니다.
+
+NetApp Novus용 AFF A90:: 이 시스템은 Novus에 맞게 특별히 구성된 AFF A90 시스템으로, Novus 구축 환경에서 _ONTAP 데이터 서버_로 사용됩니다. NetApp Novus용 각 AFF A90은 듀얼 NVRAM과 400GbE 호스트 네트워킹을 갖춘 2노드, 스위치가 없는 ONTAP HA 쌍입니다.
+ONTAP 세부 정보:: Novus ONTAP 데이터 서버는 맞춤형 버전의 ONTAP 9.19.1을 실행합니다.
+라이센싱:: Novus는 ONTAP One을 사용합니다. 추가 라이선스는 필요하지 않습니다.
+NVRAM 및 기본 하드웨어:: ONTAP 데이터 서버는 표준 단일 카드 구성 대신 두 개의 NVRAM 카드가 필요합니다. 시스템은 듀얼 NVRAM ONTAP 데이터 서버 변형을 식별하는 공장 구성을 포함하여 Novus 하드웨어 빌드용 AFF를 사용해야 합니다.
+네트워크 하드웨어:: ONTAP 데이터 서버는 400G 프런트엔드, 400G HA 백투백 및 100G 클러스터 백투백 연결을 지원하는 CX-7 네트워크 카드가 필요합니다.
+클러스터 크기 및 HA:: 지원되는 ONTAP 데이터 서버 배포는 2노드 스위치가 없는 클러스터로 구현된 단일 HA 쌍입니다.
+SVM 요구사항:: 클러스터당 하나의 데이터 SVM만 지원됩니다.
+프로토콜:: ONTAP 데이터 경로는 NFSv3만 지원합니다. 초기 릴리스에서는 ONTAP 데이터 경로에서 다른 프로토콜(NFSv4, SMB, S3, SAN 프로토콜)이 지원되지 않습니다.
+
+
+
+
+[[novus-data-director]]
+== Novus Data Director
+
+Novus Data Director(NDD)는 Parallel NFS(pNFS) 아키텍처에 정의된 메타데이터 서버(MDS)의 구현체입니다. 이는 적절하게 구성된 서버에서 실행되는 소프트웨어 정의 패키지입니다.
+
+
+NOTE: 지원되는 배포를 위해서는 최소 3대의 Novus Data Director가 필요합니다. 고가용성과 내결함성을 보장하려면 각각 별도의 장애 도메인에 있어야 합니다. 환경 및 워크로드에 적합한 Novus 시스템용 AFF A90 및 NDD 서버의 수를 결정하려면 NetApp 계정 팀에 문의하십시오.
+
+호스트 플랫폼 요약:: 고객 또는 파트너가 제공하며 NetApp Novus 하드웨어 및 펌웨어 구성 요구 사항을 충족하는 서버입니다. 호스트는 RAID1(드라이브 2개) 또는 RAID10(드라이브 4~12개)으로 구성된 NVMe 드라이브를 사용하여 RHEL 9를 실행해야 합니다.
+Linux 및 NFS:: Red Hat Linux 9.8(NFSv4(v4.2) 포함); pNFS가 활성화되어 있고 올바르게 구성되어 있어야 합니다.
+최소 클러스터 배포:: 최소 하나의 ONTAP HA 쌍을 지원하는 3개의 개별 장애 도메인에 3개의 Novus Data Director가 있습니다. 각 테넌트는 자체 데이터베이스 클러스터를 보유하고 있으며, 3개의 데이터 복사본(각 호스트에 하나씩)이 있습니다.
+네트워킹:: 각 테넌트는 자체 VLAN 및 VRF로 격리됩니다.
+
+
+
+
+[[novus-clients]]
+== Novus 클라이언트
+
+NFS 유연 파일 레이아웃은 Ubuntu 24.04 이상 및 Red Hat Linux 9.8 이상에서 제공되는 표준 NFS 클라이언트를 사용하여 지원됩니다. 스트라이핑을 사용하는 유연 파일 레이아웃의 경우 Ubuntu 26.04의 NFS 클라이언트만 지원됩니다.
+
+
+
+[[related-information]]
+== 관련 정보
+
+* link:../faq-novus.html["Novus 스토리지 시스템 관련 FAQ"]
+* https://hwu.netapp.com/["NetApp Hardware Universe"^]
+* https://imt.netapp.com/["상호운용성 매트릭스 도구"^]
+

@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: release-notes/whats-new-current.html 
+keywords: 'novus release notes, novus what"s new' 
+summary: NetApp Novus에 포함된 새로운 기능에 대해 알아보세요. 
+---
+= 초기 Novus 스토리지 시스템 릴리스의 새로운 기능
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+NetApp Novus에 포함된 새로운 기능에 대해 알아보세요.
+
+
+
+[[novus-initial-release]]
+== Novus 초기 출시
+
+NetApp Novus는 병렬 NFS(pNFS)의 확장성과 ONTAP의 입증된 데이터 관리 기능을 결합하여, AI 및 기타 데이터 집약적 워크로드를 위한 고성능 스토리지 솔루션을 제공합니다. 엑사스케일 컴퓨팅 및 기가와트급 AI 팩토리를 보유한 고객의 요구 사항을 충족하기 위해 최첨단 처리량과 낮은 지연 시간을 제공하도록 설계되었습니다. 아키텍처 및 구축 요구 사항에 대해 자세히 알아보려면 다음 페이지를 검토하십시오.
+
+* link:../get-started/learn-novus.html["Novus에 대해 알아보세요"]
+* link:../get-started/requirements.html["Novus 요구 사항"]
+

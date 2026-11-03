@@ -1,0 +1,50 @@
+---
+sidebar: sidebar 
+permalink: faq-novus.html 
+keywords: novus, novus system, faq, frequently asked questions 
+summary: 이 FAQ 목록은 Novus 스토리지 시스템에 대해 궁금해할 수 있는 질문에 대한 답변을 제공합니다. 또한 제품을 더 자세히 살펴볼 때 도움이 될 수 있는 개념과 용어도 포함되어 있습니다. 
+---
+= Novus 스토리지 시스템 관련 FAQ
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+이 FAQ 목록은 Novus 스토리지 시스템에 대해 궁금해할 수 있는 질문에 대한 답변을 제공합니다. 또한 제품을 더 자세히 살펴볼 때 도움이 될 수 있는 개념과 용어도 포함되어 있습니다.
+
+.NetApp Novus는 어떤 프로토콜을 지원합니까?
+Novus는 다음 프로토콜을 지원합니다:
+
+* NFS v4.2를 사용하는 pNFS(pNFS 유연 파일 레이아웃에 필요)
+* RDMA를 통한 NFS
+* NVIDIA GPUDirect
+
+
+.Novus는 pNFS 유연 파일 레이아웃을 지원합니까?
+예, pNFS 유연한 파일 레이아웃이 지원됩니다. 와이드 스트라이핑을 사용하는 유연한 파일 레이아웃의 경우, 지원되는 Linux 배포판의 NFS 클라이언트가 필요합니다. 2026년 10월 현재, Ubuntu 26.04와 함께 제공되는 NFS 클라이언트만 와이드 스트라이핑을 지원합니다.
+
+.Novus는 사용자 지정 파일 시스템 클라이언트가 필요합니까?
+아니요. Novus는 표준 NFS 클라이언트와 호환됩니다.
+
+.Novus는 멀티테넌시를 지원합니까?
+예--Novus는 다음을 사용하여 안전한 멀티테넌시를 제공합니다:
+
+* 메타데이터 계층에서의 네임스페이스 격리
+* 서브넷/VLAN을 통한 네트워크 격리
+* 노드 풀: 전용 Novus Data Director, 네임스페이스 및 KVS
+* 테넌트별 ID 공급자 및 암호화 키 관리
+* 테넌트를 위한 전용 데이터 서버
+
+
+.Novus 클러스터의 최대 스토리지 용량은 얼마입니까?
+초기 Novus 릴리스는 최대 600개의 AFF A90 HA 쌍(시스템)을 지원합니다. 클러스터의 총 스토리지 한도는 사용되는 드라이브의 크기에 따라 달라집니다.
+
+.Novus Data Directors에서 메타데이터는 어떻게 분할되고 보호됩니까?
+메타데이터는 노드 그룹 전체에 걸쳐 분할되고, 각 노드 그룹 내에서는 3중 복제됩니다. 노드 그룹은 3개의 Data Directors로 구성되므로 메타데이터 계층은 항상 3의 배수로 확장됩니다. 분할은 키 범위별로 이루어집니다. 예를 들어, 한 노드 그룹은 A부터 N까지의 키를, 다른 노드 그룹은 M부터 Z까지의 키를 저장합니다. 따라서 노드 그룹이 추가됨에 따라 메타데이터 테이블은 더 넓은 세트에 걸쳐 분할됩니다.
+
+.기존 ONTAP AFF A90 클러스터를 Novus용으로 용도 변경하여 사용할 수 있습니까?
+아니요. 기존 ONTAP 컨트롤러는 Novus 배포용으로 용도 변경하거나 업그레이드할 수 없습니다. NetApp Novus를 위해 새로운 AFF A90을 구매해야 합니다.

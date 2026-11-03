@@ -1,0 +1,47 @@
+---
+sidebar: sidebar 
+permalink: use-ndd/task-check-health.html 
+keywords: get started, cli, novus data director, ndd, health check, mds-admin 
+summary: Novus 사용을 시작하려면 NDD 상태 점검을 수행하여 배포가 올바르게 작동하는지 확인할 수 있습니다. 
+---
+= Novus Data Director 상태 확인
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Novus 사용을 시작하려면 NDD 상태 점검을 수행하여 배포가 올바르게 작동하는지 확인할 수 있습니다.
+
+.이 작업 정보
+이 작업에서는 Novus Data Director(NDD) 배포의 상태를 점검하여 모든 구성 요소가 올바르게 작동하는지 확인하는 방법을 안내합니다.
+
+.시작하기 전에
+ `mds-admin` 명령을 실행하는 데 필요한 권한을 포함하여 NDD 명령줄 인터페이스에 액세스할 수 있어야 합니다. 또한 link:../use-ndd/learn-use-ndd.html["NDD 사용 방법을 알아보십시오"]을(를) 검토하십시오.
+
+.단계
+. 전반적인 상태를 확인하십시오:
++
+`mds-admin status`
+
+. 모든 MDS 노드에 접근 가능한지 확인하십시오:
++
+`mds-admin cluster status`
+
+. ONTAP 데이터 서버를 나열하십시오:
++
+`mds-admin ds list`
+
+. 데이터 서버의 용량 표시:
++
+`mds-admin ds capacity show`
+
+. 상태 점검을 실행하십시오:
++
+`timeout 60 mds-admin doctor`
+
+. 파일의 데이터가 저장된 위치를 찾으십시오:
++
+`mds-admin file locate <path>`
+
+

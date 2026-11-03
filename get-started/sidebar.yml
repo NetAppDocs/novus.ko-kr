@@ -1,0 +1,16 @@
+---
+section: get-started
+title: 시작하기
+entries:
+- title: Novus 시스템에 대해 알아보세요
+  entries:
+  - title: Novus에 대해 알아보세요
+    url: "/get-started/learn-novus.html"
+  - title: 아키텍처
+    url: "/get-started/novus-architecture.html"
+  - title: 환경 및 처리
+    url: "/get-started/novus-environment-processing.html"
+- title: Novus 요구 사항
+  url: "/get-started/requirements.html"
+- title: Novus 배포 예시
+  url: "/get-started/deployment-example.html"

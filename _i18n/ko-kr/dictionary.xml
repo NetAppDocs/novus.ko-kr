@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocks>
+  <block id="0cfc0df31483f98b0c522ea552176434" category="summary">이 FAQ 목록은 Novus 스토리지 시스템에 대해 궁금해할 수 있는 질문에 대한 답변을 제공합니다. 또한 제품을 더 자세히 살펴볼 때 도움이 될 수 있는 개념과 용어도 포함되어 있습니다.</block>
+  <block id="32ec884504c435e0e52ff73dc41e50c9" category="doc">Novus 스토리지 시스템 관련 FAQ</block>
+  <block id="f23592cfe157925dc8982e3f7697d68a" category="paragraph-title">NetApp Novus는 어떤 프로토콜을 지원합니까?</block>
+  <block id="c99c8844776a3f728f10c4ff862fec99" category="paragraph">Novus는 다음 프로토콜을 지원합니다:</block>
+  <block id="670181787cd4f84290dbf71e55ed0d32" category="list-text">NFS v4.2를 사용하는 pNFS(pNFS 유연 파일 레이아웃에 필요)</block>
+  <block id="3f91a2c4d8ba66304e817a6c1c8d8086" category="list-text">RDMA를 통한 NFS</block>
+  <block id="a4cf6d511a4b9e5f03a1ce0e60ec26a9" category="list-text">NVIDIA GPUDirect</block>
+  <block id="4051c2ab9f38c1f847cebe04cd34176e" category="paragraph-title">Novus는 pNFS 유연 파일 레이아웃을 지원합니까?</block>
+  <block id="6f6de87f758984d4d08925c6289fa983" category="paragraph">예, pNFS 유연한 파일 레이아웃이 지원됩니다. 와이드 스트라이핑을 사용하는 유연한 파일 레이아웃의 경우, 지원되는 Linux 배포판의 NFS 클라이언트가 필요합니다. 2026년 10월 현재, Ubuntu 26.04와 함께 제공되는 NFS 클라이언트만 와이드 스트라이핑을 지원합니다.</block>
+  <block id="f4486b27b5e351620bc976902fb3eee1" category="paragraph-title">Novus는 사용자 지정 파일 시스템 클라이언트가 필요합니까?</block>
+  <block id="b55ddf3070e6aee507d4a6a0255796f8" category="paragraph">아니요. Novus는 표준 NFS 클라이언트와 호환됩니다.</block>
+  <block id="25c51cabb1f47ae72c3339204d569970" category="paragraph-title">Novus는 멀티테넌시를 지원합니까?</block>
+  <block id="fffe10d716263a47a522f96ac514d6d8" category="paragraph">예--Novus는 다음을 사용하여 안전한 멀티테넌시를 제공합니다:</block>
+  <block id="b0b170682a0c504c4acf4028b208ce51" category="list-text">메타데이터 계층에서의 네임스페이스 격리</block>
+  <block id="0e9704b02270e0333667fa7006c2958f" category="list-text">서브넷/VLAN을 통한 네트워크 격리</block>
+  <block id="25fdaad3da4c767cd425b32cb001c636" category="list-text">노드 풀: 전용 Novus Data Director, 네임스페이스 및 KVS</block>
+  <block id="e80fdbeed6434a55cbf57b9e1b0c298e" category="list-text">테넌트별 ID 공급자 및 암호화 키 관리</block>
+  <block id="ff81abac1f3b6718072116e5cff90a4b" category="list-text">테넌트를 위한 전용 데이터 서버</block>
+  <block id="233798820adbeaf0195dbaceeeb6d29a" category="paragraph-title">Novus 클러스터의 최대 스토리지 용량은 얼마입니까?</block>
+  <block id="6ff051e4bbb7af6eb5ea37f6d246a729" category="paragraph">초기 Novus 릴리스는 최대 600개의 AFF A90 HA 쌍(시스템)을 지원합니다. 클러스터의 총 스토리지 한도는 사용되는 드라이브의 크기에 따라 달라집니다.</block>
+  <block id="4a18895b0107bfce7384fff1ad977c03" category="paragraph-title">Novus Data Directors에서 메타데이터는 어떻게 분할되고 보호됩니까?</block>
+  <block id="8a6609496f78e11d36cd0e77a703e0fb" category="paragraph">메타데이터는 노드 그룹 전체에 걸쳐 분할되고, 각 노드 그룹 내에서는 3중 복제됩니다. 노드 그룹은 3개의 Data Directors로 구성되므로 메타데이터 계층은 항상 3의 배수로 확장됩니다. 분할은 키 범위별로 이루어집니다. 예를 들어, 한 노드 그룹은 A부터 N까지의 키를, 다른 노드 그룹은 M부터 Z까지의 키를 저장합니다. 따라서 노드 그룹이 추가됨에 따라 메타데이터 테이블은 더 넓은 세트에 걸쳐 분할됩니다.</block>
+  <block id="f8bceaee291b9ec78ca55a2641d76b9d" category="paragraph-title">기존 ONTAP AFF A90 클러스터를 Novus용으로 용도 변경하여 사용할 수 있습니까?</block>
+  <block id="097d0248cd331de8062669401368ed87" category="paragraph">아니요. 기존 ONTAP 컨트롤러는 Novus 배포용으로 용도 변경하거나 업그레이드할 수 없습니다. NetApp Novus를 위해 새로운 AFF A90을 구매해야 합니다.</block>
+  <block id="2669b9f89cb83040a074375a68bdf64b" category="summary">Novus 스토리지 시스템은 성능 및 용량 요구 사항에 따라 다양한 구성으로 배포할 수 있습니다. 다음은 간단한 배포 예입니다.</block>
+  <block id="73035894d61f113f345567102bfc18b0" category="doc">Novus 스토리지 시스템 구축 사례</block>
+  <block id="5ba1abc9e3c80faee7087878221b6b1b" category="paragraph">Novus 스토리지 시스템은 성능 및 용량 요구 사항에 따라 여러 가지 구성으로 배포할 수 있습니다. 다음은 두 개의 그림을 사용한 간단한 예입니다.</block>
+  <block id="4cc4075604529a747e3dfdfb88328789" category="section-title">스토리지 클러스터 연결</block>
+  <block id="55e90b5559b8c82d92e8c26030f37095" category="paragraph">다음 그림은 Novus 구축에 필요한 일반적인 스토리지 시스템 네트워크 연결을 보여줍니다.</block>
+  <block id="992248864426ba7b9185d34a6637ae2e" category="inline-image-macro">Novus 배포 1</block>
+  <block id="9760133cf6b0a9e315c42b3790586fd7" category="paragraph"><block ref="9760133cf6b0a9e315c42b3790586fd7" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="c2125589d390394e242469a75e76850e" category="section-title">고성능 스토리지(HPS) 네트워크 아키텍처</block>
+  <block id="7bf83157515ebed19ee6f28eaec78ced" category="paragraph">1024개의 GPU를 사용하는 구축 환경에서는 최신 세대 GPU의 표준 성능 요구 사항을 충족하기 위해 총 3대의 NetApp Novus 스토리지 시스템용 AFF A90과 3대의 Novus Data Director(NDD) 서버가 필요합니다. 다음 그림은 이러한 구성과 해당 규모의 시스템에 대한 관련 HPS 네트워크 아키텍처를 보여줍니다.</block>
+  <block id="8997a29a6b890194fcf5f05fbaff590a" category="inline-image-macro">Novus 배포 2</block>
+  <block id="069844d5e0546fac6ef6bb5af6493831" category="paragraph"><block ref="069844d5e0546fac6ef6bb5af6493831" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="a084a68e59454f6f722f19c9fceacd65" category="summary">NetApp Novus는 대규모 AI의 요구 사항을 충족하도록 구축된 강력한 새로운 스토리지 시스템입니다. 이는 엔터프라이즈 스토리지 분야에서 쌓은 NetApp의 경험을 학습 및 추론에 필요한 초고성능 인프라로 확장합니다. 효과적인 관리와 최적의 성능을 위해서는 관리 구조 및 구성 옵션을 이해하는 것이 매우 중요합니다.</block>
+  <block id="84e390f3d8c550024430346187897ee5" category="doc">Novus 스토리지 시스템에 대해 알아보세요</block>
+  <block id="1dc296778ef9129dd622258befb38f28" category="paragraph">NetApp Novus는 대규모 AI의 요구 사항을 충족하도록 구축된 강력한 스토리지 시스템입니다. 이는 엔터프라이즈 스토리지에 대한 NetApp의 경험을 학습 및 추론에 필요한 초고성능 인프라로 확장합니다. 효과적인 관리와 최적의 성능을 위해서는 관리 구조 및 구성 옵션을 이해하는 것이 매우 중요합니다.</block>
+  <block id="3b878279a04dc47d60932cb294d96259" category="section-title">개요</block>
+  <block id="cce4a64880bdef067589ead78cd97183" category="paragraph">NetApp Novus는 최신 AI 워크로드에 필요한 처리량과 확장성을 위해 설계된 스케일아웃 파일 스토리지 시스템 솔루션입니다. 이 솔루션은 여러 개의 독립적인 ONTAP 스토리지 클러스터를 클라이언트가 하나의 파일 시스템으로 인식하는 단일 네임스페이스로 결합합니다. Novus는 메타데이터와 파일 데이터를 분리하는 병렬 NFS(pNFS)를 기반으로 구축되었습니다. 전용 메타데이터 서비스가 네임스페이스를 관리하는 동안 스토리지 클러스터는 파일 데이터를 클라이언트에 병렬로 직접 제공합니다. 이를 통해 단일 스토리지 클러스터의 처리량 한계를 제거하여 시스템의 데이터 전송 속도를 더 이상 제한하지 않습니다.</block>
+  <block id="e3f903305d24aea914ebcfd39d4a704d" category="paragraph">Novus 배포는 스토리지 클러스터를 추가하는 것만으로 간단하게 확장할 수 있습니다. 각각의 새 클러스터는 전체 대역폭과 용량을 네임스페이스에 추가하므로, 클라이언트 리마운트나 운영 중단 리밸런싱 없이 시스템이 확장됨에 따라 전체 처리량이 증가합니다. 메타데이터 서비스는 데이터 서버와 별도로 확장되므로 워크로드에 맞춰 네임스페이스 크기와 메타데이터 성능을 확장할 수 있습니다. Novus는 각 스토리지 노드를 최대 속도로 실행하고 대규모 환경에서도 구성 요소 장애를 일상적이고 중단 없는 방식으로 처리하도록 설계되었습니다. 주요 목표는 시스템 규모가 매우 커지더라도 컴퓨팅으로의 데이터 흐름을 유지하는 것입니다.</block>
+  <block id="a56b3bb96bc48a5b57bbf054086c6c51" category="paragraph">클라이언트는 표준 NFS 클라이언트를 사용하므로 Novus를 대규모 GPU 및 컴퓨팅 클러스터에 쉽게 적용할 수 있습니다. 또한 Novus는 멀티 테넌트이므로 하나의 배포로 여러 격리된 고객이나 워크로드를 호스팅할 수 있으며, 각각 고유한 개별 네임스페이스를 가집니다. 또한 검증된 ONTAP의 데이터 관리 및 보호 기능을 기반으로 구축되었습니다. 고객에게 이는 GPU를 계속 가동하고, 각 노드에서 더 많은 성능을 얻어 인프라 비용을 낮추며, 단일 네임스페이스에서 매우 큰 데이터 세트를 지원할 수 있는 스토리지를 의미합니다.</block>
+  <block id="fb2463bfe2dcaa5ca6651a285822fb0c" category="paragraph">Novus는 대규모로 AI 및 기타 데이터 집약적인 워크로드를 실행하는 조직에 도움을 줄 수 있습니다. 여기에는 일반적으로 네오클라우드, GPU-as-a-service 제공업체, 소버린 클라우드, 하이퍼스케일러는 물론 AI 학습 및 추론을 실행하는 대기업 및 연구 기관이 포함됩니다. Novus는 초당 수 테라바이트의 처리량이 필요하고 컴퓨팅과 함께 스토리지를 확장하고자 하는 고성능 컴퓨팅 또는 미디어 처리를 사용하는 모든 고객에게 유용할 수 있습니다.</block>
+  <block id="396f0fa55d99dd1070a3f9192253ba11" category="section-title">시스템 설계 원칙</block>
+  <block id="c1bf9bbb5761f10e614af8b39c0eaa7e" category="paragraph">Novus는 몇 가지 핵심 원칙을 기반으로 설계 및 구축되었습니다. 이러한 기본 아키텍처 선택은 성능, 확장성 및 복원력을 향상시킵니다. 이는 GPU 활용도를 높이는 고성능 스토리지가 필요하면서도 인프라 비용을 절감하고자 하는 고객에게 도움이 됩니다.</block>
+  <block id="d8ae7fa000beb8aa5e4a17e722c3bc25" category="list-text">엑사스케일 지원 스토리지</block>
+  <block id="e77c2f9d751a63ceb1dbb8301f04bfe6" category="list-text">Novus는 엑사스케일급 소프트웨어 정의 스토리지 기반 스택으로 설계되었습니다. 수평 확장이 가능한 pNFS 메타데이터 서버와 분리되고 분산된 데이터 서버를 결합합니다.</block>
+  <block id="b72dba02dd916467665190bb29cfd2f2" category="list-text">기존 ONTAP 클러스터 한계를 뛰어넘는 처리량</block>
+  <block id="0034f2ac15fb7ab94633f497ee1f43c6" category="list-text">기존에는 단일 ONTAP 클러스터의 경우 컨트롤러 수와 상호 연결 대역폭에 따라 고정된 처리량 한계에 도달합니다. AI 학습 및 추론에는 단일 ONTAP 클러스터로는 도달할 수 없는 처리량이 필요합니다.</block>
+  <block id="cdea4f3a2d5ff68f9d4db2936937cea0" category="list-text">클러스터를 추가하여 확장</block>
+  <block id="51758880280429d6a30d78f0e32a426a" category="list-text">Novus는 각각 하나의 HA 쌍만큼 작은 여러 개의 독립적인 ONTAP 클러스터를 단일 네임스페이스로 결합합니다. 각각의 새로운 클러스터는 전체 대역폭을 제공하므로 전체 처리량이 선형적으로 증가합니다. 클라이언트는 리마운트할 필요가 없으며 플릿은 재조정할 필요가 없습니다.</block>
+  <block id="0755e8892a9b71a403544266cd67100b" category="list-text">별도로 확장되는 메타데이터</block>
+  <block id="9c0e1e07c28a07813a67f10d831d48ea" category="list-text">메타데이터 서비스 계층과 샤딩된 메타데이터 저장소는 각각 1개에서 1,000개 이상의 인스턴스로 확장될 수 있습니다. 메타데이터 용량과 요청 속도는 사용되는 데이터 노드 수에 따라 달라지지 않습니다.</block>
+  <block id="9bbaa57b5622a2e30d1e3ded14d75578" category="list-text">회선 속도 데이터 노드</block>
+  <block id="64afce942600ea951f92f2e2a3367a12" category="list-text">각 데이터 노드는 읽기 시에는 NIC 최대 속도로, 쓰기 시에는 NVMe 최대 속도로 작동해야 합니다. 노드별로 사용되지 않는 처리량은 불필요한 하드웨어 및 비용 낭비로 이어집니다.</block>
+  <block id="15f7ab55207219b0744b7800cf3bce74" category="list-text">복원력을 주요 설계 제약 조건으로</block>
+  <block id="fa985af1482c7f5b083eb335b36cea6d" category="list-text">1,000개 이상의 스토리지 노드가 있는 규모에서는 장애가 드물지 않습니다. 복원력은 설계 시 우선적으로 고려해야 할 사항이며, 운영상의 부가적인 고려 사항이 아닙니다.</block>
+  <block id="7a82daa63e66d18705842b20ebe6e16c" category="section-title">네트워크 파일 시스템(NFS) 구현</block>
+  <block id="0762a6cd974851da9de3df7c27f5e3d9" category="paragraph">Novus는 네트워크 파일 시스템(NFS) 프로토콜의 소프트웨어 정의 구현입니다. 메타데이터와 데이터 경로를 분리하기 위해 NFSv4, 특히 병렬 NFS(pNFS) 확장을 사용합니다. 클라이언트는 표준 NFS 클라이언트를 사용하여 NFSv4로 Novus Data Director(NDD)에 액세스하는 동시에, NFSv3를 사용하여 ONTAP 데이터 서버에서 데이터에 직접 액세스할 수 있습니다.</block>
+  <block id="edc3b0f9843bf446907c74443f558452" category="section-title">병렬 네트워크 파일 시스템(pNFS)</block>
+  <block id="7346528094de8a2516e88943d7ddf75a" category="paragraph">병렬 NFS(pNFS)는 NFSv4.1에서 도입된 기능으로, 파일 메타데이터 관리와 파일 데이터 접근을 분리합니다. NFS 서버는 메타데이터 작업을 처리하고 클라이언트에게 파일 데이터가 저장된 위치에 대한 정보를 제공합니다. 따라서 클라이언트는 모든 읽기 및 쓰기 작업을 단일 서버를 통해 전송하는 대신, 전용 스토리지 장치와 데이터 서버에서 데이터에 직접 접근할 수 있습니다.</block>
+  <block id="ff563330f23b190889f5960de8b3c51e" category="paragraph">NFS 서버는 각 파일의 데이터가 어떻게 구성되고 클라이언트가 어떻게 접근할 수 있는지를 설명하는 레이아웃을 제공합니다. 레이아웃 및 스토리지 구성에 따라 클라이언트는 하나 이상의 데이터 서버와 병렬로 통신할 수 있습니다. 이는 데이터 전송 성능을 향상시키고 메타데이터 서버의 데이터 처리 부하를 줄입니다.</block>
+  <block id="22134934a79f3bf7daa0edf44ee1518f" category="paragraph">pNFS는 파일, 블록, 오브젝트 및 플렉서블 파일 등 여러 레이아웃 유형을 지원합니다. 각 유형은 파일 데이터를 기본 스토리지에 매핑하는 방식과 클라이언트가 해당 데이터에 액세스하는 방식을 다르게 정의합니다. Novus는 플렉서블 파일 레이아웃을 사용합니다.</block>
+  <block id="f9351340d3e59272c0a88862c39c3c1e" category="paragraph">pNFS의 유연한 파일 레이아웃은 최근 레이아웃 옵션에 추가된 기능입니다. 이 기능은 여러 데이터 서버에 분산 저장된 데이터를 설명할 수 있는 유연한 파일 기반 레이아웃을 제공하며, 미러링된 복사본도 지원합니다. 클라이언트는 레이아웃 정보를 사용하여 액세스에 적합한 데이터 서버 경로를 선택합니다. 이를 통해 배포 환경에서 스토리지 구성 및 워크로드 요구 사항에 맞춰 데이터 배치 및 액세스 동작을 조정할 수 있습니다.</block>
+  <block id="4e5ab91395a55ff39c56f0429860b71b" category="section-title">주요 구성 요소</block>
+  <block id="71ea50f58624c9a8e3bb006b7f6c99de" category="paragraph">pNFS 표준과 NetApp의 엔터프라이즈 스토리지 전문 기술을 기반으로 구축된 두 가지 주요 Novus 구성 요소가 있습니다.</block>
+  <block id="18f20de9fe1eedaeaa192ebc886ac54f" category="list-text">ONTAP 데이터 서버</block>
+  <block id="433c37725f317b7540178f2e865fc6ac" category="list-text">ONTAP 데이터 서버는 Novus 데이터 플레인을 구현합니다. 파일 데이터를 저장하고 NFS 클라이언트에 제공합니다. Novus 네임스페이스는 파일 데이터를 여러 ONTAP 클러스터에 분산할 수 있으며, 하나의 ONTAP 클러스터는 여러 네임스페이스를 지원할 수 있습니다.</block>
+  <block id="eaaa04e22c2ab5544674a11758faf0e8" category="list-text">Novus Data Director (NDD)</block>
+  <block id="917e1cead3bddb81bd3b50ab3ff55b15" category="list-text">Novus Data Director는 Novus 메타데이터 플레인을 제공합니다. 이 디렉터는 네임스페이스 메타데이터를 관리하고, 메타데이터 작업에 대한 클라이언트 요청을 처리하며, ONTAP 클러스터 전체에 파일 데이터가 저장되는 위치를 설명하는 레이아웃을 클라이언트에 제공합니다. 클라이언트는 pNFS와 함께 NFSv4.2를 사용하여 NDD와 상호 작용하며, 실제 파일 데이터는 ONTAP에서 직접 액세스됩니다.</block>
+  <block id="7801aabb25f022a608e31a0494f3bfb3" category="inline-link-macro">Novus 아키텍처</block>
+  <block id="2a860046fc9aa89fec212c1a00c5376c" category="paragraph">이러한 구성 요소와 이들이 함께 작동하는 방식에 대한 자세한 내용은 <block ref="bca9bed85f55b2a9966229f89c3a23ff" category="inline-link-macro-rx"></block>을(를) 참조하십시오.</block>
+  <block id="ec278262dc4750d3ab885db3e6b53fad" category="section-title">추가 기술 및 개념</block>
+  <block id="6e326bd7c7ea0b3a2171f0fca44b2e65" category="paragraph">Novus와 그 기반 기술과 관련된 몇 가지 추가적인 개념이 있습니다.</block>
+  <block id="b3ba0fe968ce39dcfc6fe8cc0f1b02da" category="list-text">네임스페이스</block>
+  <block id="f4b3a940c31d4e49db53b67e4b7344ee" category="list-text">네임스페이스는 리소스를 구성하고 식별하는 논리적 구조로, 정의된 범위 내에서 일관되게 참조할 수 있도록 합니다. NFSv4에서 네임스페이스는 클라이언트에 제공되는 파일 및 디렉터리의 계층 구조이며, 클라이언트가 경로를 사용하여 탐색할 수 있는 내보낸 파일 시스템에 대한 통합된 보기를 제공합니다. 각 NDD 네임스페이스에는 자체 메타데이터 서버 인스턴스가 있습니다.</block>
+  <block id="43db2a9bc6b7310c67fd6873bb6ca7a4" category="list-text">연합</block>
+  <block id="567ba6bb9780d0358ad99faac6077fb5" category="list-text">페더레이션은 독립적인 시스템들을 연결하여 서로 협력하면서도 개별적으로 관리될 수 있도록 하는 기술입니다. 이는 ID, 애플리케이션 서비스, 네트워크, 데이터베이스 및 기타 리소스에 적용될 수 있습니다. 데이터 공급자와 함께 사용될 경우, 페더레이션을 통해 사용자 또는 애플리케이션은 통합된 인터페이스를 통해 여러 소스의 데이터에 접근할 수 있으며, 공급자는 데이터에 대한 제어권을 유지하면서 상호 운용성을 지원하고 정보의 중앙 집중화 또는 중복 필요성을 줄일 수 있습니다.</block>
+  <block id="2b3ea8c2ac323f736480d2b3a6baf7e4" category="list-text">샤딩</block>
+  <block id="6ec2bc21327628241a0cedbb4621f180" category="list-text">샤딩은 데이터베이스의 데이터를 여러 서버에 분산시키는 기술로, 각 서버는 데이터의 일부를 저장하고 제공합니다. 이를 통해 스토리지와 쿼리 부하를 분산시켜 용량과 성능을 향상시킬 수 있습니다.</block>
+  <block id="6cb99182f716fc822a12edd05ffd39bb" category="list-text">보더 게이트웨이 프로토콜</block>
+  <block id="7e088054248020b7b3af81d7f540a163" category="list-text">BGP(Border Gateway Protocol)는 인터넷을 구성하는 네트워크인 자율 시스템 간에 도달 가능성 정보를 교환하고 라우팅 정책 및 속성을 사용하여 경로를 선택하는 라우팅 프로토콜입니다. Novus는 멀티테넌트 아키텍처를 지원하기 위해 BGP를 사용합니다.</block>
+  <block id="97918895159c1e7defef81180b7fa3db" category="list-text">확장 가능한 분산 메타데이터 저장소</block>
+  <block id="afd17178e34e0b5ac01eae548ddb1b3c" category="list-text">확장 가능한 분산 메타데이터 저장소는 여러 노드에 걸쳐 메타데이터를 관리하여 고가용성, 내결함성 및 효율적인 액세스를 보장하는 시스템입니다. Novus에서 Novus Data Director(NDD)는 네임스페이스 메타데이터를 처리하고 클라이언트에게 파일 데이터에 액세스하기 위한 레이아웃을 제공하기 위해 확장 가능한 분산 메타데이터 저장소(또는 간단히 _메타데이터 저장소_)를 구현합니다.</block>
+  <block id="30f60d67f457bb040dffde52197a54da" category="section-title">관련 정보</block>
+  <block id="e3e20b328871eb15b0f991c9d9b602e5" category="inline-link">RFC 8435: 병렬 NFS(pNFS) 유연 파일 레이아웃</block>
+  <block id="683cfca95420311b20eaf301b6c39149" category="list-text"><block ref="683cfca95420311b20eaf301b6c39149" category="inline-link-rx"></block></block>
+  <block id="1d343564cb9e2afdcf80e6f98eb4e07d" category="inline-link">RFC 8178: NFSv4 확장 및 마이너 버전에 대한 규칙</block>
+  <block id="5a401aaebd2a0cb7932efa2845408068" category="list-text"><block ref="5a401aaebd2a0cb7932efa2845408068" category="inline-link-rx"></block></block>
+  <block id="26c39d0adfa36a44f9946d08971693be" category="inline-link">RFC 8881: 네트워크 파일 시스템(NFS) 버전 4 마이너 버전 1 프로토콜</block>
+  <block id="d8023d4877c353d5e7fd12805bd4423c" category="list-text"><block ref="d8023d4877c353d5e7fd12805bd4423c" category="inline-link-rx"></block></block>
+  <block id="224d0fd2fc3764f64d513cd83eba38c7" category="inline-link">RFC 7862: 네트워크 파일 시스템(NFS) 버전 4 마이너 버전 2 프로토콜</block>
+  <block id="1845814b98136a2d15254aa757e22815" category="list-text"><block ref="1845814b98136a2d15254aa757e22815" category="inline-link-rx"></block></block>
+  <block id="57cf9865afb74c46569ca25524642533" category="summary">Novus 아키텍처는 Novus Data Director(NDD) 인스턴스와 ONTAP 데이터 서버로 구성됩니다. ONTAP 데이터 서버는 데이터 경로를 지원하고, NDD는 Parallel NFS(pNFS)를 통해 메타데이터와 클라이언트 액세스를 관리합니다.</block>
+  <block id="6398e7f4abf482b17972a25f35f3c004" category="doc">Novus 스토리지 시스템 아키텍처</block>
+  <block id="5dac09461534086ea3d9d6360aa1c860" category="paragraph">데이터 서버는 Novus를 위해 특별히 구축된 ONTAP 클러스터입니다. 이들은 Novus 데이터 플레인을 구현하고 파일 데이터를 저장하며 NFS 클라이언트에 제공합니다. Novus 네임스페이스는 파일 데이터를 여러 ONTAP 클러스터에 분산할 수 있으며, 하나의 클러스터는 여러 다른 네임스페이스를 지원할 수 있습니다. 이러한 유연성을 통해 필요에 따라 데이터 서버를 추가하여 용량과 성능을 확장할 수 있습니다.</block>
+  <block id="abe3373cc8ef939fbfdc6949f08b6f76" category="paragraph">클라이언트는 맞춤형 NetApp 소프트웨어 없이 표준 NFS 클라이언트를 사용하여 ONTAP 데이터 서버에 액세스합니다. 클라이언트는 Novus Data Director에서 파일 레이아웃을 받은 후 NFSv3 및 선택적으로 RDMA를 통해 ONTAP 데이터 서버에서 파일 데이터를 직접 읽고 쓸 수 있습니다. 대용량 데이터는 Novus Data Director를 거치지 않으므로 데이터 트래픽은 데이터 서버 전체에서 병렬로 전송됩니다.</block>
+  <block id="b3dc264a33bb985fc505f1536d237b49" category="paragraph">데이터 서버는 네임스페이스 관리에 참여하지 않습니다. 각 파일의 데이터를 ONTAP 볼륨에 백업 파일로 저장합니다. ONTAP 데이터 서버는 디렉터리 트리나 파일이 데이터 서버 전체에 스트라이프되는 방식 등 Novus 네임스페이스 메타데이터를 유지 관리하지 않습니다.</block>
+  <block id="262b8b361e8ef950b3378b9b626c2fe4" category="paragraph">NetApp Novus용 AFF A90은 ONTAP을 실행하는 Novus를 위해 구축된 AFF A90의 한 버전입니다. 특징은 다음과 같습니다.</block>
+  <block id="29734b1e97e6a7d798ed948f394323f9" category="list-text">추가 듀얼 NVRAM 카드</block>
+  <block id="ab708d2d36bd733efdff9bf0fb28993c" category="list-text">고대역폭 네트워크 어댑터</block>
+  <block id="6896d1515a3999ac7d31ca541034f0ed" category="list-text">표준 ONTAP HA 쌍으로 구성됨</block>
+  <block id="1d5c345e7e7e24044b3f31805362cf7c" category="list-text">RAID-DP 또는 RAID-TEC로 데이터를 보호합니다.</block>
+  <block id="7757e4ace5e1553410d74316b62ef89d" category="paragraph">표준 ONTAP 클러스터는 Novus 데이터 서버로 사용할 수 없으며, Novus 전용으로 구축된 플랫폼만 지원됩니다.</block>
+  <block id="4227331a109e4a12d9454a0e24ef8832" category="section-title">Novus Data Director</block>
+  <block id="844b1e067078fa01806c6815dcc1e5c4" category="paragraph">Novus Data Director(NDD)는 pNFS 아키텍처에서 메타데이터 서버(MDS) 역할을 구현한 것으로, Novus 메타데이터 플레인을 제공합니다. _MDS 호스트_는 Linux를 실행하는 하나의 물리적 서버와 MDS 프로토콜 서비스 및 메타데이터 저장소로 구성됩니다.</block>
+  <block id="add452f0041bbcae103c39466f9361aa" category="paragraph">NDD는 각 네임스페이스를 클라이언트에게 단일 파일 시스템으로 제공합니다. NDD는 파일 및 디렉터리, 파일 속성, 각 파일의 데이터가 저장된 위치의 매핑, 클라이언트 액세스를 조정하는 데 필요한 프로토콜 상태 등 네임스페이스 메타데이터를 소유합니다. 클라이언트는 가상 IP 주소를 통해 네임스페이스를 마운트하고 병렬 NFS(pNFS)와 함께 NFSv4.2를 사용하여 NDD와 통신합니다. NDD는 조회, 파일 생성, 속성 변경 등 모든 메타데이터 작업을 처리합니다. 클라이언트가 파일을 열면 NDD는 클라이언트에게 파일 데이터가 저장된 데이터 서버를 알려주는 pNFS Flexible File 레이아웃을 제공합니다. 그런 다음 클라이언트는 ONTAP 데이터 서버와 직접 읽기 및 쓰기 작업을 수행할 수 있으며, NDD는 메타데이터 경로에는 있지만 데이터 경로에는 없습니다.</block>
+  <block id="340d58c1959c2c949a557cd805569263" category="paragraph">NDD는 최소 3대 이상의 전용 서버 클러스터에서 실행되는 소프트웨어로 구현됩니다. 이는 메타데이터 서버 프로세스를 암호화된 로컬 스토리지에 네임스페이스 메타데이터를 저장하는 복제된 분산 데이터베이스와 결합합니다. 각 네임스페이스는 이러한 서버 중 여러 대에서 자체 메타데이터 서버 프로세스를 실행합니다. 모든 정상 서버는 네임스페이스의 가상 IP 주소를 알리며, 이는 클라이언트 부하를 분산시키고 클라이언트가 재마운트 없이 장애 조치를 수행할 수 있게 해줍니다. 권위 있는 메타데이터가 복제된 데이터베이스에 존재하므로, 서버에 장애가 발생하여 다시 시작하더라도 네임스페이스 상태를 잃지 않습니다.</block>
+  <block id="19d2081a074b45ead1a875d093f20e08" category="paragraph">ONTAP 클러스터의 데이터 배치는 NDD가 제어합니다. NDD는 데이터 서버의 레지스트리를 유지하고, 경량 NFS 프로브를 사용하여 각 데이터 서버가 사용 가능한지 확인하며, 각 서버의 여유 용량을 추적합니다. 파일이 생성되면 NDD는 데이터 서버를 선택하고, NFS를 통해 배킹 파일을 생성하며, 해당 위치를 기록합니다. 데이터 서버를 사용할 수 없게 되면 NDD는 해당 서버에 새 데이터를 배치하는 것을 중지하고 해당 서버를 가리키는 클라이언트 레이아웃을 회수합니다.</block>
+  <block id="15a576377533d9c92e21e7779b573599" category="section-title">Novus 배포</block>
+  <block id="969436d3093ede333ae168004b0595f3" category="paragraph">다음 그림은 일반적인 Novus 배포를 개략적으로 보여줍니다. 주요 특징으로는 여러 개의 Novus Data Director와 ONTAP 데이터 서버 노드가 있는 단일 네임스페이스를 들 수 있습니다. 이 아키텍처는 백엔드 GPU 서버를 지원하여 높은 가용성과 낮은 지연 시간을 제공합니다.</block>
+  <block id="4b7c1627fd35a8830d7d2c5a10b4d709" category="paragraph"><block ref="4b7c1627fd35a8830d7d2c5a10b4d709" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="df24b5171a05e7d224bc6ffb72a52962" category="summary">Novus 환경 및 처리 방식에는 여러분이 이해해야 할 몇 가지 중요한 측면이 있습니다.</block>
+  <block id="067f30e2321a6b32de622bfdadefb425" category="doc">Novus 스토리지 시스템 환경 및 처리</block>
+  <block id="4c3aa44c7ffe90542611736ad836a238" category="section-title">Novus Data Director와 ONTAP 데이터 서버 내부 통신</block>
+  <block id="b95aabb5777e63df44b17e9615fd17b1" category="paragraph">Novus Data Director는 파일 액세스 및 관리를 지원하기 위해 ONTAP 데이터 서버와 통신합니다. 이러한 통신은 대부분 ONTAP 서버보다는 NDD에서 시작됩니다.</block>
+  <block id="fb317e403279651c17b57d9410a33108" category="section-title">ONTAP 데이터 서버 탐색</block>
+  <block id="9dab92a6c10e53b458ff7b5acd4c11f2" category="paragraph">Novus Data Director는 사용 가능한 데이터 서버가 무엇인지 탐색해야 합니다. ONTAP은 Novus Data Director와의 통신을 절대 시작하지 않습니다. 운영자 또는 툴은 시작 시 사용되는<block ref="83281a38646516af2d9a9d99dd333845" prefix=" " category="inline-code"></block> 구성 파일을 통해 각 데이터 서버를 등록합니다. 데이터 서버는<block ref="aa7334da829d5d73f1695920695480b4" prefix=" " category="inline-code"></block> 명령을 사용하여 수동으로 추가할 수도 있습니다. 각 데이터 서버는 호스트, 엑스포트, 포트, 상태 및 용량 등을 포함하여 분산 메타데이터 저장소의 행으로 표시됩니다.</block>
+  <block id="f3d46806d1b2260acec6a3d19fa52b4e" category="section-title">ONTAP 데이터 서버 가용성</block>
+  <block id="cfd19b34b2fb1b2d359ceef808816169" category="paragraph">각 ONTAP 데이터 서버의 가용성을 확인하는 데에는 여러 가지 프로세스가 사용됩니다.</block>
+  <block id="83622997d22f5f18b9b09bd364cb673e" category="list-text">하트비트</block>
+  <block id="83349a612b7d8312a451c8b34f381038" category="list-text">MDS는 TCP를 통해 각 온라인 데이터 서버로 NFSv3 NULL RPC 호출을 보냅니다. 기본적으로 하트비트 메시지를 사용하여 5초마다 이 작업을 수행합니다.</block>
+  <block id="387cc1dc754d1c6aecd9985636e56d23" category="list-text">오프라인으로 전환하기</block>
+  <block id="9b88b83eefd57ec79e4b0812fec1989c" category="list-text">연속으로 일정 횟수 이상 오류가 발생하면 데이터 서버는 오프라인으로 표시됩니다. MDS는 더 이상 해당 서버에 새 파일을 배치하지 않고 클라이언트에게 해당 서버를 가리키는 레이아웃을 반환하도록 알립니다.</block>
+  <block id="4c9c10bd1e5d6ea2cc927c5cecafa351" category="list-text">돌아오기</block>
+  <block id="ac2be31b6dad5d8490b20119c10cfd48" category="list-text">연속적으로 충분한 수의 성공적인 탐색이 이루어지면 온라인 상태로 복귀합니다. 쿨다운 기간은 상태가 반복적으로 전환되는 것을 방지합니다.</block>
+  <block id="4f09617a0d0425364705ca49fa432aad" category="list-text">클라이언트 오류는 포함되지 않습니다</block>
+  <block id="22b4455a82198d391f20acfdba1f53f8" category="list-text">클라이언트가 오류를 보고하면 로그에만 기록됩니다. ONTAP 데이터 서버의 상태는 프로브만으로 판단됩니다.</block>
+  <block id="52b918d1f31e3257e61adbbb0e0a4829" category="list-text">ONTAP 페일오버는 보이지 않습니다</block>
+  <block id="3ac5d75dd1f2aff51ad8c12b5e1a7ca2" category="list-text">ONTAP HA 쌍이 테이크오버를 수행하는 경우 MDS는 프로브 타임아웃을 통해서만 이를 감지합니다.</block>
+  <block id="9648cd08e415897e1c52a6de9f60258a" category="section-title">ONTAP 데이터 서버 데이터 콘텐츠</block>
+  <block id="317af1a9720679746bbbcd3a15f1294a" category="paragraph">NDD는 ONTAP에 무엇을 저장하는지 묻지 않습니다. 모든 배킹 파일을 생성하기 때문에 이미 알고 있습니다:</block>
+  <block id="281180ff46a93cd63646c306eacb2458" category="list-text">파일이 생성되면 MDS는 데이터 서버를 선택하고 해당 서버에 백업 파일을 생성한 다음, 분산 메타데이터 저장소의 스트라이프 매핑에 결과를 저장합니다. 스트라이프 매핑에는 각 스트라이프와 미러를 보유하는 데이터 서버 및 NFS 파일 핸들이 기록됩니다.</block>
+  <block id="a5a6be3a47b0f8aac382254c456512e3" category="list-text">ONTAP의 백킹 파일은 NDD에서 특정 이름 형식을 갖습니다.</block>
+  <block id="6ac439a0281ff3d06c7d477b7df9431b" category="list-text">용량은 NDD가 마운트된 각 내보내기에 대해 statvfs()를 사용하여 ONTAP에서 읽는 유일한 운영 값입니다.</block>
+  <block id="02199364ea1025a345eeeec8efa006c2" category="list-text">파일 크기는 ONTAP에 대해 검증되지 않습니다. 클라이언트의 레이아웃 커밋을 기준으로 결정됩니다.</block>
+  <block id="004238df02d138a0bc4de2239fbdb867" category="section-title">NDD 클러스터의 고가용성 및 복원력</block>
+  <block id="749d25be3bbe1e0288175d1788e12dd6" category="paragraph">Novus Data Director를 기반으로 하는 메타데이터 플레인은 시스템의 높은 가용성과 복원력을 보장합니다.</block>
+  <block id="a09c4080507bf2aa1c48bb2dd627b314" category="section-title">클러스터 디자인</block>
+  <block id="05bdc5e1d582231fc909c611fa904739" category="paragraph">Novus는 NDD 서비스의 고가용성과 내결함성을 보장하기 위해 멀티 호스트 클러스터를 사용합니다.</block>
+  <block id="88f2ef300bed6a97a6996812cef84033" category="list-text">장애 도메인이 3개 있는 호스트 3개</block>
+  <block id="8cd795e1895b6a7adc4592fa8c5e392a" category="list-text">최소 NDD 클러스터 구성은 물리적 호스트 3대 또는 별도의 서버에 배포된 가상 머신(VM) 3대입니다. 각 호스트는 하나의 MDS 프로세스와 하나의 메타데이터 저장소 노드를 실행합니다. 이 클러스터는 호스트 하나에 장애가 발생하더라도 계속 작동하도록 설계되었습니다.</block>
+  <block id="8328deeae9c1133a717dc0b9baf7ed18" category="list-text">모든 복제본은 서비스합니다</block>
+  <block id="2555e79124e86f65b8d423018c63d770" category="list-text">모든 MDS 복제본은 대기 모드로 지정되지 않고 동시에 클라이언트를 처리합니다. 모든 정상 복제본은 BGP를 통해 동일한 VIP를 알립니다. BGP 자체 타이머만으로는 완벽한 장애 조치 메커니즘이 될 수 없으므로 BFD(고속 링크 장애 감지)가 필요합니다. 복제본은 NFS 서비스, 게이트웨이 및 메타데이터 저장소 연결이 모두 클라이언트 처리 준비가 완료된 경우에만 VIP를 알립니다.</block>
+  <block id="70fde657046d813243fa244d73767622" category="list-text">메타데이터 복제</block>
+  <block id="d5263a3c9c80994a957b90e265f45e4b" category="list-text">분산 메타데이터 저장소는 세 개의 동기식 복사본을 유지합니다. 중재자는 양측이 모두 쓰도록 허용하는 대신 비가용 상태로 전환하여 스플릿 브레인 상황을 방지합니다.</block>
+  <block id="1e9da5a08664f9f16e4ceed6d4875a28" category="list-text">재시작은 안전합니다</block>
+  <block id="51c0c113611246c1174fa0d0d95c8bf3" category="list-text">MDS 프로세스는 자체 상태를 유지하지 않습니다. 분산 메타데이터 저장소가 권위 있는 메타데이터를 보관합니다.</block>
+  <block id="eaf4c4ddc21bf0f1edade472e923a1f5" category="section-title">제한 사항 및 주의 사항</block>
+  <block id="9a015298a58b38114a68c34e922c461d" category="paragraph">다음과 같은 제한 사항 및 주의 사항에도 유의하시기 바랍니다:</block>
+  <block id="fa12fd5c6944884f351dfc30615a73a6" category="list-text">서브트리 소유권은 자동으로 장애 조치되지 않습니다. 네임스페이스는 여러 서브트리로 분할될 수 있으며, 각 서브트리는 하나의 MDS가 소유합니다. 소유자에게 장애가 발생하면 VIP가 이미 이동했더라도 소유자가 복구될 때까지 해당 서브트리는 대기 상태가 됩니다.</block>
+  <block id="bfe5026f08754ffe2fa5eb9a3a586c67" category="list-text">각 테넌트가 호스트당 하나의 복제본을 가지고 있기 때문에 하나의 호스트 장애는 해당 호스트의 모든 테넌트에 영향을 미칩니다.</block>
+  <block id="a4b6c16dc63a1380be4a9c18f2a4894b" category="list-text">클라이언트는 호스트 IP가 아닌 VIP를 마운트해야 합니다. 그렇지 않으면 클라이언트가 페일오버를 수행할 수 없습니다.</block>
+  <block id="44b47d6016953ad319f4fc3107d7e699" category="list-text">하드 마운트는 복구 중에 차단될 수 있습니다. 마운트가 차단되었다고 해서 데이터가 손실된 것은 아닙니다.</block>
+  <block id="10194deb5ecf48e83e20efe587cd3538" category="list-text">유지보수는 항상 한 번에 하나의 복제본에 대해서만 수행하십시오. 먼저 VIP에서 복제본을 제외하고 드레인하십시오.</block>
+  <block id="d70a32ab91e13d5405a25beff90b23f8" category="summary">일반적으로 세 가지 범주로 나뉘는 Novus의 요구 사항을 숙지해야 합니다.</block>
+  <block id="d6bad7f9eb22c7c75e842e3350cc7a47" category="doc">Novus 요구 사항</block>
+  <block id="a104bb88e3775e12cef6be6b03a095d9" category="admonition">자세한 내용은 NetApp Hardware Universe 및 상호 운용성 매트릭스 툴에서 제품 요구 사항 및 제한 사항을 검토하십시오.</block>
+  <block id="80137df58a946ee06ce041ff97ffa01c" category="paragraph">Novus와 함께 사용되는 ONTAP 데이터 서버에는 몇 가지 요구 사항과 제약 조건이 있습니다. 초기 제품 출시의 경우, Novus 전용 하드웨어 향상 기능과 제한된 소프트웨어 및 구성 프로필을 갖춘 ONTAP 기반 AFF 플랫폼입니다. 지원되는 설계는 출시 시점에 의도적으로 제한되었으며, 주요 요구 사항과 제약 조건이 명확하게 명시되어 있습니다.</block>
+  <block id="0412c8fc8fdf62a908f6df80191c9797" category="list-text">NetApp Novus용 AFF A90</block>
+  <block id="78ad06512c37018c753d3b8696262914" category="list-text">이 시스템은 Novus에 맞게 특별히 구성된 AFF A90 시스템으로, Novus 구축 환경에서 _ONTAP 데이터 서버_로 사용됩니다. NetApp Novus용 각 AFF A90은 듀얼 NVRAM과 400GbE 호스트 네트워킹을 갖춘 2노드, 스위치가 없는 ONTAP HA 쌍입니다.</block>
+  <block id="19d3ac248b5c90139734c975779a07fc" category="list-text">ONTAP 세부 정보</block>
+  <block id="57b88125c68ea728d9c4a56530948ea3" category="list-text">Novus ONTAP 데이터 서버는 맞춤형 버전의 ONTAP 9.19.1을 실행합니다.</block>
+  <block id="0b9c6eef4e3d3a222eb04e910d252339" category="list-text">라이센싱</block>
+  <block id="0cfd223d986e720ebc66e8922ee80fbe" category="list-text">Novus는 ONTAP One을 사용합니다. 추가 라이선스는 필요하지 않습니다.</block>
+  <block id="62729d45015204d3c18b606e8b130fba" category="list-text">NVRAM 및 기본 하드웨어</block>
+  <block id="19df370f56ca362e0f12a957c2f24e3d" category="list-text">ONTAP 데이터 서버는 표준 단일 카드 구성 대신 두 개의 NVRAM 카드가 필요합니다. 시스템은 듀얼 NVRAM ONTAP 데이터 서버 변형을 식별하는 공장 구성을 포함하여 Novus 하드웨어 빌드용 AFF를 사용해야 합니다.</block>
+  <block id="6fdb75d7463ed3b21de808a4997142a6" category="list-text">네트워크 하드웨어</block>
+  <block id="d382787d6a25ca6ebe3e0120a0e69179" category="list-text">ONTAP 데이터 서버는 400G 프런트엔드, 400G HA 백투백 및 100G 클러스터 백투백 연결을 지원하는 CX-7 네트워크 카드가 필요합니다.</block>
+  <block id="f23eb97e49afc006ec38a2844e5d2d9c" category="list-text">클러스터 크기 및 HA</block>
+  <block id="5bc926c2e260a7d4cae7682f7a9f3805" category="list-text">지원되는 ONTAP 데이터 서버 배포는 2노드 스위치가 없는 클러스터로 구현된 단일 HA 쌍입니다.</block>
+  <block id="df926542d1d5a9624603245475e2182a" category="list-text">SVM 요구사항</block>
+  <block id="9f042b7e4e7ab06ad0d8ac3c0161e928" category="list-text">클러스터당 하나의 데이터 SVM만 지원됩니다.</block>
+  <block id="9985b4390c40137573e6da05caf85874" category="list-text">프로토콜</block>
+  <block id="8f98f9138ea133966cc3046379b7caa5" category="list-text">ONTAP 데이터 경로는 NFSv3만 지원합니다. 초기 릴리스에서는 ONTAP 데이터 경로에서 다른 프로토콜(NFSv4, SMB, S3, SAN 프로토콜)이 지원되지 않습니다.</block>
+  <block id="41fd49de9a67d9c0c7a368dfec87cf55" category="paragraph">Novus Data Director(NDD)는 Parallel NFS(pNFS) 아키텍처에 정의된 메타데이터 서버(MDS)의 구현체입니다. 이는 적절하게 구성된 서버에서 실행되는 소프트웨어 정의 패키지입니다.</block>
+  <block id="ab89730b1c0ddbc96294317b88683dd7" category="admonition">지원되는 배포를 위해서는 최소 3대의 Novus Data Director가 필요합니다. 고가용성과 내결함성을 보장하려면 각각 별도의 장애 도메인에 있어야 합니다. 환경 및 워크로드에 적합한 Novus 시스템용 AFF A90 및 NDD 서버의 수를 결정하려면 NetApp 계정 팀에 문의하십시오.</block>
+  <block id="5f4e9c328b9900db18c9c15431444402" category="list-text">호스트 플랫폼 요약</block>
+  <block id="f6b126dfffe01c1d4e08552b0e457433" category="list-text">고객 또는 파트너가 제공하며 NetApp Novus 하드웨어 및 펌웨어 구성 요구 사항을 충족하는 서버입니다. 호스트는 RAID1(드라이브 2개) 또는 RAID10(드라이브 4~12개)으로 구성된 NVMe 드라이브를 사용하여 RHEL 9를 실행해야 합니다.</block>
+  <block id="b6406c75c0350aec23c47fee1ee2a193" category="list-text">Linux 및 NFS</block>
+  <block id="7151cfccfe49d166eb7ed1b2a3e0a542" category="list-text">Red Hat Linux 9.8(NFSv4(v4.2) 포함); pNFS가 활성화되어 있고 올바르게 구성되어 있어야 합니다.</block>
+  <block id="407b3fa32a9da4d905f9bcac5ca88dd0" category="list-text">최소 클러스터 배포</block>
+  <block id="371667d4c676e528821c40011ab19822" category="list-text">최소 하나의 ONTAP HA 쌍을 지원하는 3개의 개별 장애 도메인에 3개의 Novus Data Director가 있습니다. 각 테넌트는 자체 데이터베이스 클러스터를 보유하고 있으며, 3개의 데이터 복사본(각 호스트에 하나씩)이 있습니다.</block>
+  <block id="a5fa5746370b608090b994a97b49e98b" category="list-text">네트워킹</block>
+  <block id="09c0693af0c4d2ca6fffac5a6cfc15c6" category="list-text">각 테넌트는 자체 VLAN 및 VRF로 격리됩니다.</block>
+  <block id="8677447f85f9fe9f64b0a1fdc8257df7" category="section-title">Novus 클라이언트</block>
+  <block id="a0313a5eee50de66036769f364a3da54" category="paragraph">NFS 유연 파일 레이아웃은 Ubuntu 24.04 이상 및 Red Hat Linux 9.8 이상에서 제공되는 표준 NFS 클라이언트를 사용하여 지원됩니다. 스트라이핑을 사용하는 유연 파일 레이아웃의 경우 Ubuntu 26.04의 NFS 클라이언트만 지원됩니다.</block>
+  <block id="e1255e2b38f609706d5012298e1d8572" category="list-text"><block ref="e1255e2b38f609706d5012298e1d8572" category="inline-link-macro-rx"></block></block>
+  <block id="e5e09031843479ef9ef8cbbd4c2f404c" category="inline-link">NetApp Hardware Universe</block>
+  <block id="4c1c93397a0ad82f0b80502a6c7c0799" category="list-text"><block ref="4c1c93397a0ad82f0b80502a6c7c0799" category="inline-link-rx"></block></block>
+  <block id="918d32b75f0ab883abba3a8dc0c3ae8d" category="inline-link">상호운용성 매트릭스 도구</block>
+  <block id="1348884cba210fd3710a88c66a82ead4" category="list-text"><block ref="1348884cba210fd3710a88c66a82ead4" category="inline-link-rx"></block></block>
+  <block id="8bbb4bcec95e49c78db0a96031291796" category="summary">Novus 관리 및 지원에 도움이 되는 추가 리소스는 물론 ONTAP 및 관련 NetApp 제품 및 서비스에 대한 자세한 정보도 확인할 수 있습니다.</block>
+  <block id="f6e049d51130319c9676fa72ba222714" category="doc">Novus 스토리지 시스템 관련 추가 자료</block>
+  <block id="005d884ee35bad9a1f620da17f3dd01d" category="section-title">Novus 및 관련 리소스</block>
+  <block id="504ab4dbe5e77c1f7c6c877d6215262e" category="inline-link">NetApp Novus</block>
+  <block id="e7bf046058094c6ea353835df32f9828" category="list-text"><block ref="e7bf046058094c6ea353835df32f9828" category="inline-link-rx"></block></block>
+  <block id="eb75aeb3b4b2b9734ba3e52f5483f0b2" category="section-title">ONTAP 문서</block>
+  <block id="b33eab3f59e19afa3da64a7838372c21" category="inline-link">통합 ONTAP</block>
+  <block id="8cba816055afe0aa04b7fa2e9b1ba364" category="list-text"><block ref="8cba816055afe0aa04b7fa2e9b1ba364" category="inline-link-rx"></block></block>
+  <block id="3a77755c4eaf7897cda1f7db8e722428" category="inline-link">ONTAP 자동화</block>
+  <block id="486f6a4f906831713aed8c2567b3d906" category="list-text"><block ref="486f6a4f906831713aed8c2567b3d906" category="inline-link-rx"></block></block>
+  <block id="0659d428df833a806e29e65e632d380a" category="section-title">NetApp 지원</block>
+  <block id="9d2169c1c2855b78a7aeaa4f42d27dc7" category="inline-link">NetApp 지원 사이트</block>
+  <block id="df9f9e9d2170bb250eb3337384525b86" category="list-text"><block ref="df9f9e9d2170bb250eb3337384525b86" category="inline-link-rx"></block></block>
+  <block id="9ed4a475dd3705157a9fed8811f63ce2" category="inline-link">NetApp 상호 운용성 매트릭스 도구</block>
+  <block id="f6735f5b05187d612456240f1b4e15a9" category="list-text"><block ref="f6735f5b05187d612456240f1b4e15a9" category="inline-link-rx"></block></block>
+  <block id="668e2078ef1b1722c77cdb5c523a4463" category="inline-link">NetApp 기술 자료</block>
+  <block id="0a33bb860367c3285ff09c33b79eef88" category="list-text"><block ref="0a33bb860367c3285ff09c33b79eef88" category="inline-link-rx"></block></block>
+  <block id="d41d8cd98f00b204e9800998ecf8427e" category="summary"></block>
+  <block id="d6e3d74dae457438c77a9af9b45ebdb5" category="doc">Novus 스토리지 시스템에 대한 법적 고지</block>
+  <block id="e9c44bbfd795a5d63d74c6a77afee70d" category="paragraph">법적 고지사항은 저작권 표시, 상표, 특허 등에 대한 접근을 제공합니다.</block>
+  <block id="6016a2b341113bf496b719905398ecd2" category="section-title">저작권</block>
+  <block id="52009bb7ee17227f566cd26a02caee56" category="inline-link-macro"><block ref="52009bb7ee17227f566cd26a02caee56" category="inline-link-rx"></block></block>
+  <block id="a1a9afcf552a769c282769271829889a" category="paragraph"><block ref="a1a9afcf552a769c282769271829889a" category="inline-link-macro-rx"></block></block>
+  <block id="126a02652da6de02962cf1b654fd6376" category="section-title">상표</block>
+  <block id="c4ce4761e466527d26b3e3d5ed1006fd" category="paragraph">NETAPP, NETAPP 로고 및 NetApp 상표 페이지에 나열된 마크는 NetApp, Inc.의 상표입니다. 다른 회사 및 제품 이름은 해당 소유자의 상표일 수 있습니다.</block>
+  <block id="f99aa604031e5049799e73b5c3748a98" category="inline-link-macro"><block ref="f99aa604031e5049799e73b5c3748a98" category="inline-link-rx"></block></block>
+  <block id="5d545fe5152641e2ebe654e336e520e5" category="paragraph"><block ref="5d545fe5152641e2ebe654e336e520e5" category="inline-link-macro-rx"></block></block>
+  <block id="be89498d2f8a22ce47c02ba9795fe2af" category="section-title">특허</block>
+  <block id="d0b19d36be2c5f16e9aef46c8a452d3d" category="paragraph">NetApp이 소유한 특허의 현재 목록은 다음에서 확인할 수 있습니다:</block>
+  <block id="88e5eabd3917048b6927c42496b98f86" category="inline-link-macro"><block ref="88e5eabd3917048b6927c42496b98f86" category="inline-link-rx"></block></block>
+  <block id="dd38f906b37d412de7d1c1dcf4cbf31c" category="paragraph"><block ref="dd38f906b37d412de7d1c1dcf4cbf31c" category="inline-link-macro-rx"></block></block>
+  <block id="56c34c6410dd45c5cec44149ad0ce037" category="section-title">개인정보 보호정책</block>
+  <block id="8acb58cbd50ef1b468a020ee0bd351d3" category="inline-link-macro"><block ref="8acb58cbd50ef1b468a020ee0bd351d3" category="inline-link-rx"></block></block>
+  <block id="2352c4e1f4d0024ade0869e00e6243f4" category="paragraph"><block ref="2352c4e1f4d0024ade0869e00e6243f4" category="inline-link-macro-rx"></block></block>
+  <block id="c0227cef6f07a8cd2ac72f2945b031aa" category="section-title">오픈 소스</block>
+  <block id="9b73989307c1975dfa4d5e1581e4afe8" category="paragraph">고지 파일에는 NetApp 소프트웨어에 사용된 타사 저작권 및 라이선스에 대한 정보가 포함되어 있습니다.</block>
+  <block id="85de280c3a5f2d52ffa67a8440061501" category="summary">NetApp Novus에 포함된 새로운 기능에 대해 알아보세요.</block>
+  <block id="30b88d110cd8ae8729a94c48d6f97c3a" category="doc">초기 Novus 스토리지 시스템 릴리스의 새로운 기능</block>
+  <block id="787ce35d599e16c9d9a27419a2dcb3a1" category="section-title">Novus 초기 출시</block>
+  <block id="23334411d61d606c0a9541d73b783565" category="paragraph">NetApp Novus는 병렬 NFS(pNFS)의 확장성과 ONTAP의 입증된 데이터 관리 기능을 결합하여, AI 및 기타 데이터 집약적 워크로드를 위한 고성능 스토리지 솔루션을 제공합니다. 엑사스케일 컴퓨팅 및 기가와트급 AI 팩토리를 보유한 고객의 요구 사항을 충족하기 위해 최첨단 처리량과 낮은 지연 시간을 제공하도록 설계되었습니다. 아키텍처 및 구축 요구 사항에 대해 자세히 알아보려면 다음 페이지를 검토하십시오.</block>
+  <block id="83471ca34a8dcef4f963ba05672dd66c" category="inline-link-macro">Novus에 대해 알아보세요</block>
+  <block id="cb9f8001fc9fd393f841a963e817f9eb" category="list-text"><block ref="cb9f8001fc9fd393f841a963e817f9eb" category="inline-link-macro-rx"></block></block>
+  <block id="8df21f7a5e6b140aa5885d0ec4270c76" category="list-text"><block ref="8df21f7a5e6b140aa5885d0ec4270c76" category="inline-link-macro-rx"></block></block>
+  <block id="f1a74f72dd4d807ff3fdd42ba3446293" category="summary">Novus Data Directors(NDD)는 Novus 메타데이터 계층의 핵심 역할을 하며, MDS 노드 전체에 걸쳐 메타데이터의 배포 및 소유권을 관리합니다. NDD 명령줄 인터페이스를 사용하여 관리 작업을 수행할 수 있습니다. NetApp Novus를 운영 환경에 구축하기 전에 관리 구조와 구성 옵션을 이해하는 것이 중요합니다.</block>
+  <block id="09d685f2d4553e48231d2f3f730da040" category="doc">Novus Data Director 사용 방법에 대해 알아보십시오</block>
+  <block id="4032b78e2449831b67fae92e48fda6ab" category="section-title">Novus 명령줄 인터페이스</block>
+  <block id="cda2b41ffced1ff139ce493eceb392b8" category="paragraph">활성 MDS 호스트 중 하나의 Linux 명령줄 인터페이스에서 Novus Data Director를 관리합니다. 로컬 또는 SSH를 통해 MDS 호스트에 연결할 수 있습니다. NDD 명령줄 인터페이스에서 사용할 수 있는 두 가지 주요 툴이 있습니다.</block>
+  <block id="3403879e8d31cb61a2232bf4a2153933" category="list-text">mds-admin</block>
+  <block id="df761b95de637b0e220003200a747113" category="list-text">아래에 설명된 여러 영역에서 단일 노드 인스턴스(하나의 네임스페이스)에서 작동합니다. 이 명령은 pnfs-mds 관리 엔드포인트(기본적으로 포트 50051)에 연결합니다.</block>
+  <block id="7499ac7c7ba65a0b9b16206c241a5687" category="list-text">ndd-admin</block>
+  <block id="93e607c902f5aaf4fa7cc4de180b5521" category="list-text">NDD 배포 환경 전체(모든 호스트 및 네임스페이스)에서 작동합니다. 호스트를 준비하고, 네임스페이스를 프로비저닝하며, 백업 및 복원, 키 순환, 업그레이드 등 관리 및 유지 관리 작업을 처리할 수 있습니다. 필요에 따라 사용자를 대신하여 <block ref="3403879e8d31cb61a2232bf4a2153933" prefix=" " category="inline-code"></block> 명령을 실행합니다.</block>
+  <block id="574fde817c98b1c22ac89406bf211a81" category="section-title"><block ref="3403879e8d31cb61a2232bf4a2153933" prefix=" " category="inline-code"></block>을(를) 사용하여 Novus 관리를 수행하십시오.</block>
+  <block id="d8e633f94a2590b318b82d362f76462d" category="paragraph">NDD CLI를 사용하면 Novus Data Director에서 다양한 관리 작업을 수행할 수 있습니다. 이러한 작업은 몇 가지 범주로 나뉩니다.</block>
+  <block id="83a63b05ffa2a1626642daa7270bf40b" category="admonition">NDD에서 명령을 실행할 때는 주의하십시오. 일부 명령은 시스템 상태를 변경하거나 더 높은 위험을 수반할 수 있습니다. 노드 명령 <block ref="2704ddced71e877905600819eb5a63b1" prefix="(" category="inline-code"></block>,<block ref="c996dfdd58f536b0fc9db6851c348341" prefix=" " category="inline-code"></block>,<block ref="fb433a9b7897073e3d41673a4e2e35a5" prefix=" " category="inline-code"></block>) 등 다른 명령은 손상을 초래할 수 있습니다.</block>
+  <block id="3e78d50cabed40bc7a0968312d0543a2" category="list-text">상태, 진단 및 지원</block>
+  <block id="63d96388c81952d00cb40d54dd5ecf51" category="list-text">NDD 클러스터 상태 확인</block>
+  <block id="d475d3e4dc80b85f13a8b28e1542a673" category="list-text">지원 번들을 수집하고 프로토콜 버전을 출력합니다</block>
+  <block id="b1e6958c58748f78509de51a7028db44" category="list-text">크래시로 인해 남겨진 파일과 기록을 정리합니다.</block>
+  <block id="03b7d2cac82069733f7271ddab041179" category="list-text"><block ref="3403879e8d31cb61a2232bf4a2153933" prefix=" " category="inline-code"></block> 작업 로그를 확인하거나 복구하십시오.</block>
+  <block id="ee7291736391083973dd9e9e53617bd7" category="list-text">MDS 클러스터 멤버십 및 업그레이드</block>
+  <block id="8213de57a2486b071781197d5d71b1aa" category="list-text">MDS 노드를 추가, 드레인, 분리 또는 제거하고 대기 복사본을 연결합니다.</block>
+  <block id="bf17eeedc03237b5d8b483daf13455d2" category="list-text">롤링 업그레이드를 실행하고 구성 변경 사항을 한 번에 한 노드씩 적용합니다</block>
+  <block id="905699f6d4dca322036625d48020394e" category="list-text">메타데이터 소유권: 네임스페이스가 MDS 노드 전체에 어떻게 분할되는지</block>
+  <block id="2532e7287b08b2e12940681b51836e7e" category="list-text">MDS 노드 간 서브트리를 나열, 이동, 분할 및 재할당하고 자동 분할 제안을 승인합니다.</block>
+  <block id="2d440028e85f3ccd4d99b66b884a7106" category="list-text">샤드 균형을 재조정하고 경로가 배치되는 위치를 설명합니다</block>
+  <block id="c4d27c8eaff6edb9aac1ac66fd878ba0" category="list-text">데이터 서버(ONTAP 백엔드) 관리</block>
+  <block id="f81448f97a4cde1c65e3849f5c219a24" category="list-text">데이터 서버를 등록, 제거, 검증 및 드레인하고 상태를 설정합니다.</block>
+  <block id="dd0669ff0431050853d5c9081e33a0cf" category="list-text">MDS 호스트에서 용량 확인, 배치 가중치 설정, 다중 경로 주소 및 NFS 버전 설정, 데이터 서버 마운트 관리를 수행합니다.</block>
+  <block id="ef8f90aa3c280ed241a1a9d0b4b078bf" category="list-text">엑스포트에 대한 소유권 마커를 확보하고 데이터 서버 호스트의 인벤토리를 유지하십시오.</block>
+  <block id="5b69d3ac793d2b847438082f30333a1c" category="list-text">데이터 배치 및 보호</block>
+  <block id="93ac3b6a1fb9dcf232f0e92142cf9b74" category="list-text">파일이 저장된 데이터 서버를 찾은 다음, 파일을 이동하거나, 재매핑하거나, 미러를 추가하십시오.</block>
+  <block id="8f3fae040b4d7742eaf4e4e4b4d6bdfd" category="list-text">데이터 서버에 미러를 복구하고, 데이터 서버 간에 미러를 이동하고, 목표 미러 수까지 파일을 백필합니다.</block>
+  <block id="601f040c6814a131e334030e3a687619" category="list-text">미리 생성된 파일 풀을 관리합니다</block>
+  <block id="b46b03dabe5a5adbbf02516e2bdaca9b" category="list-text">티어링 켜기 또는 끄기</block>
+  <block id="92faca2d299295d8ffbe4ea7971e9487" category="list-text">HPC 경로에 대해 와이드 스트라이핑을 켜거나 끕니다</block>
+  <block id="5ff44419f5b72cb9f4bd333c31e558ad" category="list-text">네임스페이스 정책 및 데이터 관리</block>
+  <block id="4fc493bff337414191d916435a53e931" category="list-text">할당량을 설정하십시오</block>
+  <block id="d32f1d932550ec875807fe3e2ded9eef" category="list-text">경로에 메타데이터 태그를 추가하고 태그로 검색하십시오</block>
+  <block id="3fdf672c81679c560631b8eddddac6be" category="list-text">메타데이터 카탈로그를 백업, 검증 및 복원합니다</block>
+  <block id="9564937f289b018bc04bcf16bdb5107c" category="list-text">클라이언트, 테넌트 및 추가 프로세스</block>
+  <block id="7aed893bb6a8be1e92fb82ad13bada1d" category="list-text">클라이언트 세션 만료를 강제하고, 클라이언트 복구 기록을 정리하고, 클라이언트 ID 기록을 관리합니다.</block>
+  <block id="2f76715ed99c0063b33e69d910d36ebb" category="list-text">복구 후 VIP 라우팅 처리</block>
+  <block id="e436a692adbc2c7a4f790b07d7da71a7" category="list-text">테넌트 생성, 일시 중지, 재개, 스냅샷 생성, 복원, 마이그레이션 및 제한</block>
+  <block id="63998ce1e9dee19fef29de6d661ec2c5" category="list-text">도우미("동반자") 프로세스의 리소스를 등록하고 제한합니다</block>
+  <block id="2aae6ce14ff7e228947372877e77feb3" category="section-title">NDD CLI 사용 시작하기</block>
+  <block id="81cd0a80e8eecd20cd90ce825e9f9322" category="paragraph">시작하려면 몇 가지 기본 명령어를 입력하면 됩니다.</block>
+  <block id="bbe48fb854ea022537208eeeff822f91" category="paragraph-title">이 작업 정보</block>
+  <block id="7b4cb99d0cb59a61a003611166ebe795" category="paragraph">기본적으로<block ref="3403879e8d31cb61a2232bf4a2153933" prefix=" " category="inline-code"></block>는 로컬 호스트(포트 50051의 127.0.0.1)의 메타데이터 서버에 연결합니다. 다른 NDD 인스턴스에 연결하려면 옵션<block ref="b965328cc0f8996eac5666392711743e" prefix=" " category="inline-code"></block>을<block ref="a138fc24830c2f73c6a7e2695ea66928" prefix=" " category="inline-code"></block>과 함께 사용하십시오. 호스트의 관리 주소가 아닌 MDS 주소를 사용해야 합니다.</block>
+  <block id="135b308ed83c53f1516b7c754566d1c4" category="paragraph-title">시작하기 전에</block>
+  <block id="fe2e942f98e8cef0a2041536c4f90706" category="paragraph">MDS 호스트의 IP 주소 또는 호스트 이름과 해당 호스트에 대한 SSH 액세스 권한이 필요합니다. 또한 루트 사용자로 로그인하기 위한 적절한 자격 증명이 필요합니다.</block>
+  <block id="f3a29486bed19a90f2da6d007818b427" category="list-title">단계</block>
+  <block id="256d8fcec5220be42ad87b8faac6ee1a" category="list-text">SSH를 사용하여 MDS 호스트에 연결합니다.</block>
+  <block id="0aae14b1fbdfb0baf08b5a1383f534e9" category="paragraph"><block ref="a902b4c94151da1958ffc552d917b245" prefix="" category="inline-code"></block></block>
+  <block id="71b270117f3ec85dabb18d3aaaffcb56" category="list-text">릴리스 및 프로토콜 버전을 표시합니다.</block>
+  <block id="1a680e0bbd75e0393d991775f97ad0ff" category="paragraph"><block ref="52d4ac63ea797c5a014459ed5b628890" prefix="" category="inline-code"></block></block>
+  <block id="9fd237c0b92d4d4b290417e883e18299" category="list-text">명령어 사용에 대한 도움말을 확인하세요</block>
+  <block id="894ddbbdc2dfaf1d53a6493bc878eb2c" category="paragraph">참고로 <block ref="0c113ca6d57519b559ba5a426be3c6b6" prefix=" " category="inline-code"></block>은(는) 사용 가능한 모든 명령을 나열하고 <block ref="10be18b2b9f264be48f74545ea99049d" prefix=" " category="inline-code"></block>은(는) 특정 명령에 대한 옵션을 표시합니다. 여러 단어로 된 전체 명령은 큰따옴표로 묶으십시오. <block ref="d2e408413c29fe2e6a4cad7695a52974" prefix=" " category="inline-code"></block>을(를) 사용하여 키워드로 검색할 수도 있습니다.</block>
+  <block id="7b880dfb6ca2e23b8af6f0ff06298ae6" category="summary">Novus 사용을 시작하려면 NDD 상태 점검을 수행하여 배포가 올바르게 작동하는지 확인할 수 있습니다.</block>
+  <block id="ed5006092a1a04773e8a4eef3f0c5712" category="doc">Novus Data Director 상태 확인</block>
+  <block id="a66b22ed3003e685956811fa72be2593" category="paragraph">이 작업에서는 Novus Data Director(NDD) 배포의 상태를 점검하여 모든 구성 요소가 올바르게 작동하는지 확인하는 방법을 안내합니다.</block>
+  <block id="e9c302a9f2a6e13f4242407bae30f46e" category="inline-link-macro">NDD 사용 방법을 알아보십시오</block>
+  <block id="44ab904bdafc3ed1c3125ec5423aac41" category="paragraph"><block ref="3403879e8d31cb61a2232bf4a2153933" prefix=" " category="inline-code"></block> 명령을 실행하는 데 필요한 권한을 포함하여 NDD 명령줄 인터페이스에 액세스할 수 있어야 합니다. 또한 <block ref="6edee4663b1caa6090e0adb722cf4375" category="inline-link-macro-rx"></block>을(를) 검토하십시오.</block>
+  <block id="b1034f759a0b4e42296fed4cdbdf8f48" category="list-text">전반적인 상태를 확인하십시오:</block>
+  <block id="5f950ecd91dd844e25a7bc2d84f1a156" category="paragraph"><block ref="d5cfcef631ed8f8651878310bfc6a028" prefix="" category="inline-code"></block></block>
+  <block id="576b9969a05c281adf74bbf994e41b25" category="list-text">모든 MDS 노드에 접근 가능한지 확인하십시오:</block>
+  <block id="b50358eef78a650bac67a20e2e13ae45" category="paragraph"><block ref="a7b60b96946e34a9544f8cd07856c871" prefix="" category="inline-code"></block></block>
+  <block id="40202461fc4b6f5fbd40e5e285d39c9c" category="list-text">ONTAP 데이터 서버를 나열하십시오:</block>
+  <block id="ff2abb446689abe2781d8cec657d5080" category="paragraph"><block ref="917352997c9ef2e9b56ca4a4c27fe5e9" prefix="" category="inline-code"></block></block>
+  <block id="2770557a92fa714c464ef32564697b33" category="list-text">데이터 서버의 용량 표시:</block>
+  <block id="4dbbca50fcfdc748a9cefb42e8384fbe" category="paragraph"><block ref="f1f21ebf27841ad2bda7e171e9c5b456" prefix="" category="inline-code"></block></block>
+  <block id="eba179d8c9d70111a534444bc6305d89" category="list-text">상태 점검을 실행하십시오:</block>
+  <block id="b0d1eadaab14e5dd108bfd23ee02b0cd" category="paragraph"><block ref="8b680e0cb58afb95088dc7ba85c585f9" prefix="" category="inline-code"></block></block>
+  <block id="2aadd7d69c3f057723c064a12d99ad2b" category="list-text">파일의 데이터가 저장된 위치를 찾으십시오:</block>
+  <block id="1c5da3c5ba881bc02496773f41ca78ad" category="paragraph"><block ref="078310a2e06fe5cd7d97db260f39722e" prefix="" category="inline-code"></block></block>
+  <block id="d671b37f3f24706b018b677923a9617e" category="sidebar">NetApp Novus는 엑사스케일 컴퓨팅 및 기가와트급 AI 팩토리를 운영하는 고객의 고유한 요구 사항을 충족하도록 설계된 소프트웨어 정의 스토리지 솔루션입니다. ONTAP 데이터 서버를 사용하는 병렬 NFS(pNFS) 기반 아키텍처로 구축되었습니다. Novus는 주로 클라우드 및 하이퍼스케일러 환경을 위해 설계되었으며, 지연 시간과 병목 현상을 줄이고 GPU 활용률을 높여 성능과 확장성을 획기적으로 향상시킵니다.</block>
+  <block id="121c0bcd0c9cb081cadfce0dcade3cea" category="sidebar">Novus 문서</block>
+  <block id="be11c74c1dd7f307bb80183a90dc2067" category="sidebar">시작하기</block>
+  <block id="ac413fa72b104c81e2ef5994db66f39e" category="sidebar">Novus Architecture</block>
+  <block id="5a2ebfb8baa378cfcfcba58bbb1380c2" category="sidebar">요구 사항</block>
+  <block id="541480548707d582fc387aee6e67c721" category="sidebar">Novus Data Director를 사용하십시오</block>
+  <block id="54b00db9f018bf879ea1f47d640bf1ed" category="sidebar">NDD 사용법에 대해 알아보세요</block>
+  <block id="160a05dc04d5823e22988187806fd40e" category="sidebar">NDD 상태 평가</block>
+  <block id="bf07f432276ee2fe7e55f9ea12c2ba5a" category="sidebar">자세한 정보 확인</block>
+  <block id="8fe415966f0c83729ab7f240919afd11" category="sidebar">Novus 시스템 관련 FAQ</block>
+  <block id="8cd58c89ff3d51a256ecfe3fe8bab20f" category="sidebar">추가 리소스</block>
+  <block id="8da5571296afef0e15e9cceae16a7192" category="sidebar">Novus 문서</block>
+  <block id="1fe917b01f9a3f87fa2d7d3b7643fac1" category="sidebar">FAQ</block>
+  <block id="30d965eef5ba25c6b9998ae38270b43e" category="sidebar">법적 고지</block>
+  <block id="88b058d839a498eaab9546ac2e4f7203" category="sidebar">Novus 시스템에 대해 알아보세요</block>
+  <block id="2d242bb36ec91b32005f9296ff03a912" category="sidebar">아키텍처</block>
+  <block id="90ea373e838ebbb127893f752d3bdee5" category="sidebar">환경 및 처리</block>
+  <block id="39663a86a61657cd622de3e1c05707ec" category="sidebar">Novus 배포 예시</block>
+  <block id="d59048f21fd887ad520398ce677be586" category="sidebar">더 알아보기</block>
+  <block id="7d0ee6fed10d3d4e5c9ee496729ab519" category="sidebar">릴리스 노트</block>
+  <block id="98ad55a24bfe8ea96b89a3f91b5a9b91" category="sidebar">초기 출시의 새로운 기능</block>
+  <block id="00a527d997db989d93bacb8dc93db32f" category="sidebar">Novus Data Director에 대해 알아보세요</block>
+  <block id="92675806a6b015bb6d65be3565b9618a" category="sidebar">NDD 인스턴스 상태 확인</block>
+</blocks>

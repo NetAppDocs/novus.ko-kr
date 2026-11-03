@@ -1,0 +1,31 @@
+---
+indexpage:
+  title: Novus 문서
+  summary: NetApp Novus는 엑사스케일 컴퓨팅 및 기가와트급 AI 팩토리를 운영하는 고객의 고유한 요구 사항을 충족하도록 설계된 소프트웨어
+    정의 스토리지 솔루션입니다. ONTAP 데이터 서버를 사용하는 병렬 NFS(pNFS) 기반 아키텍처로 구축되었습니다. Novus는 주로 클라우드
+    및 하이퍼스케일러 환경을 위해 설계되었으며, 지연 시간과 병목 현상을 줄이고 GPU 활용률을 높여 성능과 확장성을 획기적으로 향상시킵니다.
+  keywords: novus, netapp novus, ontap data server, nfs, parallel nfs, pnfs, mds
+  lead: NetApp Novus는 엑사스케일 컴퓨팅 및 기가와트급 AI 팩토리를 운영하는 고객의 고유한 요구 사항을 충족하도록 설계된 소프트웨어
+    정의 스토리지 솔루션입니다. ONTAP 데이터 서버를 사용하는 병렬 NFS(pNFS) 기반 아키텍처로 구축되었습니다. Novus는 주로 클라우드
+    및 하이퍼스케일러 환경을 위해 설계되었으며, 지연 시간과 병목 현상을 줄이고 GPU 활용률을 높여 성능과 확장성을 획기적으로 향상시킵니다.
+  tiles:
+  - title: 시작하기
+    links:
+    - title: Novus에 대해 알아보세요
+      url: "/get-started/learn-novus.html"
+    - title: Novus Architecture
+      url: "/get-started/novus-architecture.html"
+    - title: 요구 사항
+      url: "/get-started/requirements.html"
+  - title: Novus Data Director를 사용하십시오
+    links:
+    - title: NDD 사용법에 대해 알아보세요
+      url: "/use-ndd/learn-use-ndd.html"
+    - title: NDD 상태 평가
+      url: "/use-ndd/task-check-health.html"
+  - title: 자세한 정보 확인
+    links:
+    - title: Novus 시스템 관련 FAQ
+      url: "/faq-novus.html"
+    - title: 추가 리소스
+      url: "/learn-more/additional-resources.html"
